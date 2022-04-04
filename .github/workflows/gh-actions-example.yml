@@ -1,5 +1,36 @@
 name: GH Actions demo
 on: [push, pull_request]
 jobs:
-  Example:
-  
+  Nombre_tecnico:
+    name: Nombre mas descriptivo
+    runs-on: windows-latest
+    steps:
+      # Mostrar en pantalla el evento que activo el trigger. Con run corro ese comando, que vendria a ser un print
+      - run: echo "El trabajo fue ejecutado porque hubo un ${{ github.event_name }} ."
+      # Corre el comando en el Shell por defecto (bash) salvo que indique otro.
+      # El signo de pesos le dice a GH que es una expresion que requiere evaluacion.
+      # A ese objeto se lo denomina context, brinda info del entorno de trabajo
+     
+      # Mostrar en pantalla info del servidor
+      - run: echo "El trabajo se esta ejecutando en un servidor ${{ runner.os }} hosteado por GH."
+      
+      # Mostrar en pantalla info del repo y la rama
+      - run: echo "El repositorio se llama ${{ github.repository }} y estamos trabajando sobre ${{ github.ref }} ."
+      
+      # Usamos una accion de GH ubicado en github.com/actions
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - run: echo "El repositorio fue copiado al runner."
+      
+      - name: Listar archivos en el runner
+        run: dir ${{ github.workspace }}
+        
+      - name: Verificar si el trigger es un push o un pull request
+        if: ${{ github.event_name == 'pull_request' }}
+        run: echo "Es un pull request"
+        
+        else: 
+        run: echo "Es un push"
+        
+        
