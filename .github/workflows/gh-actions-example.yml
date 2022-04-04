@@ -1,0 +1,5 @@
+name: GH Actions demo
+on: [push, pull_request]
+jobs:
+  Example:
+  
