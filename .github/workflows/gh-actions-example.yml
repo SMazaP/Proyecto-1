@@ -30,7 +30,7 @@ jobs:
         if: ${{ github.event_name == 'pull_request' }}
         run: echo "Es un pull request"
         
-        else: 
+      - if: ${{ github.event_name == 'push' }}
         run: echo "Es un push"
         
         
